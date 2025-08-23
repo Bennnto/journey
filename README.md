@@ -9,8 +9,6 @@ Daily logs → auto-linked timeline with clickable dots.
 graph LR
   D20250823((●))
   D20250823 --- LD20250823["2025-08-23"]
-  class LD20250823 label;
-  classDef label fill=none,stroke=none;
 ```
 <!-- LIFE_MAP_END -->
 
