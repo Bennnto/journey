@@ -75,10 +75,10 @@ def build_mermaid(logs):
     lines = ["```mermaid", "graph LR"]
 
     for i, log in enumerate(logs):
-        node_id = f"D{log['date'].replace('-', '')}"
-        issue_link = log.get("issue_link")
-        title = log['title']
-        date_label = log['date']
+        node_id = f"D{log.date.replace('-', '')}"
+        issue_link = getattr(log, "issue_link", None)
+        title = log.title
+        date_label = log.date
 
         # circle dot node
         lines.append(f'  {node_id}((●))')
@@ -96,14 +96,13 @@ def build_mermaid(logs):
 
         # connect to previous
         if i > 0:
-            prev_id = f"D{logs[i-1]["date"].replace("-", "")}"
+            prev_id = f"D{logs[i-1].date.replace('-', '')}"
             lines.append(f"  {prev_id} --> {node_id}")
 
     # style for labels (smaller, no box)
     lines.append("  classDef label fill=none,stroke=none,font-size=10px;")
     lines.append("```")
     return "\n".join(lines)
-
 
 def replace_section(readme_text, new_block):
     if START not in readme_text or END not in readme_text:
