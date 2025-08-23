@@ -83,7 +83,7 @@ def build_mermaid(logs):
     for i, log in enumerate(logs):
         node_id = f"D{log.date.replace('-', '')}"
         # clickable dot linking to log file
-        lines.append(f'  {node_id}["●"](click="logs/{log.date}.md")')
+        lines.append(f'  {node_id}[("●")](click="logs/{log.date}.md")')
 
         # connect to previous node
         if i > 0:
