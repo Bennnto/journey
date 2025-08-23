@@ -88,7 +88,7 @@ def build_mermaid(logs):
         # circle dot
         lines.append(f'  {log.node_id}((●))')
         # label under dot
-        lines.append(f'  {log.node_id} --- {log.label_id}(log.date)')
+        lines.append(f'  {log.node_id} --- {log.label_id}')
         # clickable dot
         if log.link:
             lines.append(f'  click {log.node_id} "{log.link}" "{log.ref_type}: #{log.ref_id}"')
