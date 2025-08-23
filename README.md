@@ -5,7 +5,10 @@ Daily logs → auto-linked timeline with clickable dots.
 ## 📍 Life Map
 
 <!-- LIFE_MAP_START -->
-_No logs yet. Add one in `logs/`_
+```mermaid
+graph LR
+D20250823["2025-08-23 — 2025-08-23"]
+```
 <!-- LIFE_MAP_END -->
 
 ## 📚 About
