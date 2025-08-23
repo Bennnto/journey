@@ -83,7 +83,7 @@ def build_mermaid(logs):
     # Create dot nodes
     for log in logs:
         node_id = f"D{log.date.replace('-', '')}"
-        lines.append(f'  {node_id}["●"]')  # simple bracket node
+        lines.append(f'  {node_id}(("●"))')  # simple bracket node
 
     # Connect nodes chronologically
     for i in range(1, len(logs)):
