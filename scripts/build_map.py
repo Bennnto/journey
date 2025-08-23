@@ -100,7 +100,7 @@ def build_mermaid(logs):
             lines.append(f"  {prev_id} --> {node_id}")
 
     # style for labels (smaller, no box)
-    lines.append("  classDef label fill=none,stroke=none,font-size=10px;")
+    lines.append("  classDef label fill=none,stroke=none;")
     lines.append("```")
     return "\n".join(lines)
 
