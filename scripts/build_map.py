@@ -80,15 +80,21 @@ def collect_logs():
 def build_mermaid(logs):
     lines = ["```mermaid", "graph LR"]
 
-    for i, log in enumerate(logs):
+    # Create dot nodes
+    for log in logs:
         node_id = f"D{log.date.replace('-', '')}"
-        # clickable dot linking to log file
-        lines.append(f'  {node_id}[("●")](click="logs/{log.date}.md")')
+        lines.append(f'  {node_id}["●"]')  # simple bracket node
 
-        # connect to previous node
-        if i > 0:
-            prev_id = f"D{logs[i-1].date.replace('-', '')}"
-            lines.append(f'  {prev_id} --> {node_id}')
+    # Connect nodes chronologically
+    for i in range(1, len(logs)):
+        prev_id = f"D{logs[i-1].date.replace('-', '')}"
+        curr_id = f"D{logs[i].date.replace('-', '')}"
+        lines.append(f'  {prev_id} --- {curr_id}')
+
+    # Add clickable links separately
+    for log in logs:
+        node_id = f"D{log.date.replace('-', '')}"
+        lines.append(f'  click {node_id} "logs/{log.date}.md" "{log.date}"')
 
     lines.append("```")
     return "\n".join(lines)
