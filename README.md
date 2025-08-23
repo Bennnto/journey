@@ -8,7 +8,7 @@ Daily logs → auto-linked timeline with clickable dots.
 ```mermaid
 graph LR
   D20250823((●))
-  D20250823 --- LD20250823(log.date)
+  D20250823 --- LD20250823
 ```
 <!-- LIFE_MAP_END -->
 
