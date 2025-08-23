@@ -86,11 +86,9 @@ def build_mermaid(logs):
     # build nodes, labels, and edges
     for i, log in enumerate(logs):
         # circle dot
-        lines.append(f' click {log.node_id} "{log.link}" #{log.ref_id}"((●))') 
-        # label under dot
-         
+        lines.append(f' click {log.node_id}((●))') 
         # clickable dot
-        if log.link:
+        log.link:
             lines.append(f'  click {log.node_id} "{log.link}" "{log.ref_type}: #{log.ref_id}"')
         # connect to previous dot
         if i > 0:
