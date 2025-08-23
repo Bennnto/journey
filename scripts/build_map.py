@@ -72,24 +72,36 @@ def collect_logs():
 
 
 def build_mermaid(logs):
-    if not logs:
-        return '_No logs yet. Add one in `logs/`_'
+    lines = ["```mermaid", "graph LR"]
 
-    lines = ['```mermaid', 'graph LR']
-    # nodes
-    for l in logs:
-        nid = l.node_id
-        label = l.label.replace('"', "'")
-        lines.append(f'{nid}["{label}"]')
-    # edges
-    for a, b in zip(logs, logs[1:]):
-        lines.append(f'{a.node_id} --> {b.node_id}')
-    # clickable links
-    for l in logs:
-        if l.link:
-            tooltip = f"{l.ref_type}: #{l.ref_id}" if l.ref_type else ''
-            lines.append(f'click {l.node_id} "{l.link}" "{tooltip}"')
-    lines.append('```')
+    for i, log in enumerate(logs):
+        node_id = f"D{log['date'].replace('-', '')}"
+        issue_link = log.get("issue_link")
+        title = log['title']
+        date_label = log['date']
+
+        # circle dot node
+        lines.append(f'  {node_id}((●))')
+
+        # optional label under dot (tiny text)
+        label_id = f"L{node_id}"
+        lines.append(f'  {node_id} --- {label_id}["{date_label}"]')
+        lines.append(f'  class {label_id} label;')
+
+        # clickable dot
+        if issue_link:
+            lines.append(
+                f'  click {node_id} "{issue_link}" "{title}"'
+            )
+
+        # connect to previous
+        if i > 0:
+            prev_id = f"D{logs[i-1]["date"].replace("-", "")}"
+            lines.append(f"  {prev_id} --> {node_id}")
+
+    # style for labels (smaller, no box)
+    lines.append("  classDef label fill=none,stroke=none,font-size=10px;")
+    lines.append("```")
     return "\n".join(lines)
 
 
