@@ -5,7 +5,7 @@ Daily logs → auto-linked timeline with clickable dots.
 ## 📍 Life Map
 
 <!-- LIFE_MAP_START -->
-_The graph will render here after your first push._
+_No logs yet. Add one in `logs/`_
 <!-- LIFE_MAP_END -->
 
 ## 📚 About
