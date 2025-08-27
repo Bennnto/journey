@@ -78,24 +78,42 @@ def collect_logs():
 
 
 def build_mermaid(logs):
-    lines = ["```mermaid", "graph LR"]
+    lines = ["```mermaid", "graph TD"]
 
-    # Create dot nodes
+    # Define styles (electric pole look)
+    lines.append("  classDef mainLine stroke-width:3px,stroke:#333,fill:#fff;")
+    lines.append("  classDef goal fill:#c8f7c5,stroke:#2b7a0b;")
+    lines.append("  classDef struggle fill:#fdd,stroke:#c00;")
+
+    # Create main dots (the vertical electric line)
     for log in logs:
-        node_id = f"D{log.date.replace('-', '')}"
-        lines.append(f'  {node_id}(("●"))')  # simple bracket node
+        lines.append(f'  {log.node_id}(("●")):::mainLine')
 
-    # Connect nodes chronologically
+    # Connect dots in chronological order (top-down line)
     for i in range(1, len(logs)):
-        prev_id = f"D{logs[i-1].date.replace('-', '')}"
-        curr_id = f"D{logs[i].date.replace('-', '')}"
-        lines.append(f'  {prev_id} --- {curr_id}')
+        lines.append(f'  {logs[i-1].node_id} --> {logs[i].node_id}')
 
-    # Add clickable links separately
+    # Add clickable links
     for log in logs:
-        node_id = f"D{log.date.replace('-', '')}"
-        lines.append(
-            f'  click {node_id} "{REPO_URL}/blob/main/logs/{log.date}.md" "{log.date}"')
+        if log.link:  # If linked to a GitHub issue (Goal/Struggle)
+            lines.append(f'  click {log.node_id} "{log.link}" "{log.date}"')
+        else:  # Default: link to the log markdown file
+            lines.append(
+                f'  click {log.node_id} "{REPO_URL}/blob/main/logs/{log.date}.md" "{log.date}"'
+            )
+
+    # Branch out Goals and Struggles
+    for log in logs:
+        if log.ref_type == "Goal":
+            g_id = f"G{log.node_id}"
+            lines.append(f'  {log.node_id} --- {g_id}["🏆 {log.title}"]:::goal')
+            if log.link:
+                lines.append(f'  click {g_id} "{log.link}" "Goal"')
+        elif log.ref_type == "Struggle":
+            s_id = f"S{log.node_id}"
+            lines.append(f'  {log.node_id} --- {s_id}["⚡ {log.title}"]:::struggle')
+            if log.link:
+                lines.append(f'  click {s_id} "{log.link}" "Struggle"')
 
     lines.append("```")
     return "\n".join(lines)
