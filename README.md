@@ -9,9 +9,12 @@ Daily logs → auto-linked timeline with clickable dots.
 graph LR
   D20250823(("●"))
   D20250824(("●"))
+  D20250827(("●"))
   D20250823 --- D20250824
+  D20250824 --- D20250827
   click D20250823 "https://github.com/you/yourrepo/blob/main/logs/2025-08-23.md" "2025-08-23"
   click D20250824 "https://github.com/you/yourrepo/blob/main/logs/2025-08-24.md" "2025-08-24"
+  click D20250827 "https://github.com/you/yourrepo/blob/main/logs/2025-08-27.md" "2025-08-27"
 ```
 <!-- LIFE_MAP_END -->
 
