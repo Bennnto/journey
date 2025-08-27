@@ -8,7 +8,7 @@ LOG_DIR = os.path.join(ROOT, 'logs')
 README = os.path.join(ROOT, 'README.md')
 START = '<!-- LIFE_MAP_START -->'
 END = '<!-- LIFE_MAP_END -->'
-REPO_URL = os.environ.get('GITHUB_REPOSITORY_URL') or 'https://github.com/you/yourrepo'
+REPO_URL = os.environ.get('GITHUB_REPOSITORY_URL') or 'https://github.com/Bennnto/journey/'
 
 
 class Log:
