@@ -94,7 +94,8 @@ def build_mermaid(logs):
     # Add clickable links separately
     for log in logs:
         node_id = f"D{log.date.replace('-', '')}"
-        lines.append(f'  click {node_id} "logs/{log.date}.md" "{log.date}"')
+        lines.append(
+            f'  click {node_id} "{REPO_URL}/blob/main/logs/{log.date}.md" "{log.date}"')
 
     lines.append("```")
     return "\n".join(lines)
