@@ -10,8 +10,8 @@ graph LR
   D20250823(("●"))
   D20250824(("●"))
   D20250823 --- D20250824
-  click D20250823 "logs/2025-08-23.md" "2025-08-23"
-  click D20250824 "logs/2025-08-24.md" "2025-08-24"
+  click D20250823 "https://github.com/you/yourrepo/blob/main/logs/2025-08-23.md" "2025-08-23"
+  click D20250824 "https://github.com/you/yourrepo/blob/main/logs/2025-08-24.md" "2025-08-24"
 ```
 <!-- LIFE_MAP_END -->
 
